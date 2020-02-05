@@ -1,0 +1,239 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Admin</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/simple-sidebar.css' %}" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/util1.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/main1.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/util2.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main2.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/util3.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main3.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/Linearicons-Free-v1.0.0/icon-font.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/animate/animate.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/css-hamburgers/hamburgers.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/animsition/css/animsition.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/select2.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/daterangepicker/daterangepicker.css' %}">
+
+</head>
+<!-- Bootstrap core JavaScript -->
+<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  
+
+  <!-- Menu Toggle Script -->
+  <script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+  </script>
+
+
+<body>
+
+  <div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper">
+      <div class="sidebar-heading">admin</div>
+      <div class="list-group list-group-flush">
+  
+      
+                   
+                 
+          
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Contractors
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{% url 'adminaddcontractor' %}">Add  contractors</a>
+                <a class="dropdown-item" href="{% url 'adminremovecontractor' %}">Remove Contractors</a>
+                <a class="dropdown-item" href="{% url 'adminviewcontractor' %}">View Contractors</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#"></a>
+              </div>
+        <a href="{% url 'adminaddemployee' %}" class="list-group-item list-group-item-action bg-light">Add Employees</a>
+        <a href="{% url 'adminremoveemployee' %}" class="list-group-item list-group-item-action bg-light">Remove Employees</a>
+        <a href="{% url 'adminviewemployee' %}" class="list-group-item list-group-item-action bg-light">View Employees</a>
+        
+        <a href="{% url 'adminaddcontract' %}" class="list-group-item list-group-item-action bg-light">Add New Contract</a>
+        
+      </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+      <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+        <button class="btn btn-primary" id="menu-toggle"><<</button>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+              <a class="nav-link" href="'{% url 'adminhome' %}%">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../index.php">logout</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div class="container-contact100">
+		<div class="wrap-contact100">
+			<form  class="contact100-form validate-form" action="{% url 'contractsubmit' %}" method="post" onsubmit="return form()">
+				{% csrf_token %}
+                <span class="contact100-form-title">
+					ADD CONTRACTS
+				</span>
+                <div class="wrap-input100 validate-input" data-validate="Name is required">
+					<label class="label-input100" >Client name</label>
+					<input id="client"  required class="input100" type="text" name="client" placeholder="Enter Client name...">
+					<span class="focus-input100"></span>
+				</div>
+                <div class="wrap-input100 validate-input" data-validate="mobile is required">
+					<label class="label-input100" >Mobile</label>
+					<input id="mobile"  required class="input100" type="number" name="mobile" placeholder="Enter mobile...">
+					<span class="focus-input100"></span>
+				</div>
+                <div class="wrap-input100 validate-input" data-validate="required">
+					<label class="label-input100" for="type">Type</label>
+					<input id="type"  required class="input100" type="text" name="type" placeholder="Enter work type...">
+					<span class="focus-input100"></span>
+				</div>
+                
+                <div class="wrap-input100">
+					<div class="label-input100">Contractor</div>
+					<div>
+						<select class="js-select2" name="contractor">
+                            {% if authors %}
+                            {% for i in authors %}
+                               
+						                    	<option >{{i.id}}</option> 
+
+                            {% endfor %}
+                            {% endif %}
+                            
+						</select>
+				<div class="dropDownSelect2"></div>
+					</div>
+					<span class="focus-input100"></span>
+				</div>
+                <div class="wrap-input100 validate-input" data-validate="">
+					<label class="label-input100" for="salary">NumberOfEmployees</label>
+					<input id="noemp"  required class="input100" type="number" name="noemp" placeholder="Enter no of employees...">
+					<span class="focus-input100"></span>
+				</div>
+                <div class="wrap-input100 validate-input" data-validate = "">
+					<label class="label-input100" for="email">From date</label>
+					<input id="fdate" class="input100" type="date" required name="fromdate" placeholder="Selectfrom date ..">
+					<span class="focus-input100"></span>
+                </div>
+                <div class="wrap-input100 validate-input" data-validate = "">
+					<label class="label-input100" for="email">To date</label>
+					<input id="tdate" class="input100" type="date" required name="todate" placeholder="Select to date ..">
+					<span class="focus-input100"></span>
+                </div>
+				<div class="wrap-input100 validate-input" data-validate = "">
+					<label class="label-input100" for="email">Budget</label>
+					<input id="budget" class="input100" type="number" required name="budget" placeholder="Enter budget...">
+					<span class="focus-input100"></span>
+                </div>
+     
+
+
+
+				<div class="container-contact100-form-btn">
+					<button class="contact100-form-btn" name="submit">
+						submit
+					</button>
+				</div>
+
+				<div class="contact100-form-social flex-c-m">
+					<a href="#" class="contact100-form-social-item flex-c-m bg1 m-r-5">
+						<i class="fa fa-facebook-f" aria-hidden="true"></i>
+					</a>
+
+					<a href="#" class="contact100-form-social-item flex-c-m bg2 m-r-5">
+						<i class="fa fa-twitter" aria-hidden="true"></i>
+					</a>
+
+					<a href="#" class="contact100-form-social-item flex-c-m bg3">
+						<i class="fa fa-youtube-play" aria-hidden="true"></i>
+					</a>
+				</div>
+			</form>
+
+			<div class="contact100-more flex-col-c-m" style="background-image: url({% static 'img/project3.jpg' %});">
+			</div>
+		</div>
+    </div>
+    
+  <!-- Password validation -->
+
+<script>
+
+function form()
+{
+  
+
+  var str = document.getElementById('password').value;
+  var str2= document.getElementById('cpassword').value;
+  if (str.length < 6) {
+        alert("too_short");
+        return false;
+    } 
+if(str!=str1)
+{
+    alert("passwords do not match");
+    return false;    
+}
+return true;
+}
+</script>
+<!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; erp construction solutions 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+</body>
+</html>
